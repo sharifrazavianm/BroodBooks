@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="fa" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BroodBooks</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0f1729;--c1:#18223a;--c2:#202d4d;--bd:#2f3f66;--tx:#eaeffb;--mu:#9aa7c7;--am:#ffb84d;--te:#38d2b2;--co:#ff7f86;--vi:#a08fff;--sky:#51bbff;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{background:#090e1b;color:var(--tx);font:14px/1.7 Vazirmatn,Tahoma,sans-serif}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0}
+#app{max-width:520px;margin:auto;height:100%;display:flex;flex-direction:column;background:var(--bg);position:relative;overflow:hidden;border-inline:1px solid #1a2543}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;border-bottom:1px solid var(--bd);background:var(--c1)}
+.brand{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px;letter-spacing:.2px}
+.brand i{width:30px;height:30px;border-radius:10px;background:color-mix(in srgb,var(--am) 18%,transparent);color:var(--am);display:grid;place-items:center}
+.ps{background:var(--c2);border:1px solid var(--bd);border-radius:12px;padding:6px 10px;max-width:58%;outline:0}
+.ps.end{background:rgba(255,127,134,.13);border-color:rgba(255,127,134,.55);color:#ffc4c8}
+option{background:var(--c1);color:var(--tx)}
+main{flex:1;overflow:auto;padding:12px 14px 22px}
+.nav{display:flex;border-top:1px solid var(--bd);background:var(--c1);padding:6px 4px}
+.nav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:1px;padding:5px 0;color:var(--mu);font-size:11.5px;border-radius:12px}
+.nav button.on{color:var(--sky)}
+h2.pt{font-size:18px;font-weight:800;margin:2px 2px 10px}
+.card{background:var(--c1);border:1px solid var(--bd);border-radius:18px;padding:14px;margin-bottom:12px}
+.dash{background:var(--c2)}
+.dh{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.chip{display:inline-block;font-size:11.5px;padding:1px 9px;border-radius:99px;background:rgba(56,210,178,.14);color:var(--te)}
+.chip.end{background:rgba(255,127,134,.14);color:var(--co)}
+.age{font-size:30px;font-weight:800;color:var(--am);line-height:1.2;margin:6px 0 10px}
+.age small{font-size:13px;color:var(--mu);font-weight:400;margin-inline-start:6px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mini{background:var(--c1);border:1px solid var(--bd);border-radius:12px;padding:8px 10px}
+.mini span,.stat span{display:block;font-size:12px;color:var(--mu)}
+.mini b,.stat b{font-size:15px}
+.sec{font-weight:800;margin:14px 2px 8px}
+.qa{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.qa button{background:var(--c1);border:1px solid var(--bd);border-radius:16px;padding:12px 2px 9px;display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12.5px;font-weight:600}
+.ic{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;color:var(--a);background:color-mix(in srgb,var(--a) 16%,transparent);flex:none}
+.c-am{--a:var(--am)}.c-te{--a:var(--te)}.c-sky{--a:var(--sky)}.c-vi{--a:var(--vi)}.c-co{--a:var(--co)}
+.rec{display:flex;align-items:center;gap:10px;width:100%;text-align:start;background:var(--c1);border:1px solid var(--bd);border-radius:16px;padding:10px 12px;margin-bottom:8px}
+.rec .ic{width:38px;height:38px}
+.rec .m{flex:1;min-width:0}.rec .m b{display:block;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rec .m div{display:flex;gap:8px;align-items:center;font-size:12px;color:var(--mu)}
+.rec .v{font-weight:800;font-size:13.5px}.rec>svg{color:var(--mu)}
+.tw{position:relative;margin-bottom:10px}
+.ti{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:2px 0}
+.ti::-webkit-scrollbar{display:none}
+.tab{white-space:nowrap;padding:7px 15px;border-radius:99px;border:1px solid var(--bd);background:var(--c1);color:var(--mu);font-weight:600}
+.tab.on{color:var(--sky);border-color:var(--sky);background:rgba(81,187,255,.12)}
+.ar{position:absolute;inset-block:0;inset-inline-end:0;width:38px;display:grid;place-items:center;color:var(--sky);background:linear-gradient(to left,var(--bg) 55%,transparent)}
+.ar[hidden]{display:none}
+.sb .ti{background:var(--c2);border-radius:14px;padding:4px}
+.sb .tab{border:0;background:transparent;border-radius:10px;padding:4px 12px;font-size:13px}
+.sb .tab.on{background:var(--bd);color:var(--tx)}
+.sb .ar{background:linear-gradient(to left,var(--c2) 55%,transparent);border-radius:14px}
+.stats .stat:last-child:nth-child(odd){grid-column:span 2}
+.tools{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:10px 14px;border-radius:14px;font-weight:600;min-height:44px}
+.btn.pr{background:var(--am);color:#2a1c00}.btn.gh{border:1px solid var(--bd);background:var(--c1)}.btn.wide{width:100%;margin:2px 0 12px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.stat{background:var(--c1);border:1px solid var(--bd);border-radius:14px;padding:9px 12px}
+.fo{display:flex;width:100%;justify-content:space-between;align-items:center;padding:10px 14px;border:1px dashed var(--bd);border-radius:14px;color:var(--te);font-weight:600;margin-bottom:10px}
+.fo svg{transition:transform .2s}.fo.open svg{transform:rotate(-90deg)}
+.row{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px solid #263556}
+.row:last-child{border:0}.row span{color:var(--mu)}.row b{text-align:end}
+.pos{color:var(--te)}.neg{color:var(--co)}
+.na{color:var(--am);font-weight:400;font-size:12.5px}
+.lh{font-weight:800;margin:6px 2px 8px}.lh em{font-style:normal;color:var(--mu);font-weight:400}
+fieldset{border:1px solid var(--bd);border-radius:12px;padding:0 12px 6px;margin-bottom:12px;min-width:0}
+fieldset:focus-within{border-color:var(--sky)}
+fieldset.err{border-color:var(--co)}
+legend{padding:0 6px;font-size:12.5px;color:var(--mu)}
+fieldset input,fieldset select,fieldset textarea{width:100%;background:transparent;border:0;outline:0;padding:8px 2px;resize:none}
+fieldset input::placeholder,textarea::placeholder{color:#62708f}
+.em{display:block;color:var(--co);font-size:12px}.em:empty{display:none}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.calc{padding:8px 2px;font-weight:800;color:var(--am)}
+.hint{font-size:12px;color:var(--te);padding-bottom:2px}.hint:empty{display:none}
+.info{background:var(--c2);border-radius:12px;padding:8px 12px;margin:-2px 0 12px}.info:empty{display:none}
+.info div{display:flex;justify-content:space-between;padding:2px 0;font-size:13px}.info span{color:var(--mu)}
+.warn{color:var(--am)}
+.ft{font-weight:800;margin-bottom:12px}
+.acts{display:grid;grid-template-columns:2fr 1fr;gap:8px}
+.empty{text-align:center;color:var(--mu);padding:26px 14px;border:1px dashed var(--bd);border-radius:18px}
+.empty svg{color:var(--bd);margin-bottom:6px}
+.blank{border:1px dashed var(--bd);border-radius:20px;min-height:55vh}
+.ov{position:fixed;inset:0;background:rgba(7,11,22,.62);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);display:flex;align-items:center;justify-content:center;padding:16px;z-index:50}
+.ov.mo{align-items:flex-end;padding-bottom:84px}
+.md{background:var(--c1);border:1px solid var(--bd);border-radius:22px;width:100%;max-width:440px;max-height:82vh;overflow:auto;padding:14px}
+.mh{display:flex;gap:8px;align-items:center;margin-bottom:8px}.sp{flex:1}
+.ib{display:inline-flex;gap:5px;align-items:center;padding:6px 12px;border-radius:12px;border:1px solid var(--bd);font-size:13px;min-height:38px}
+.ib.dan{color:var(--co);border-color:rgba(255,127,134,.5)}
+.md h3{font-size:17px}.md .sub{color:var(--mu);font-size:12.5px;margin-bottom:8px}
+.lnk{color:var(--sky);border:1px solid var(--sky);border-radius:10px;padding:2px 10px;font-size:12.5px}
+.mg{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:440px}
+.mg button{background:var(--c1);border:1px solid var(--bd);border-radius:22px;padding:18px 8px;display:flex;flex-direction:column;align-items:center;gap:8px;font-weight:600}
+.mg button:last-child{grid-column:span 2}
+.ban{display:flex;gap:8px;align-items:center;justify-content:space-between;background:rgba(255,127,134,.12);border:1px solid rgba(255,127,134,.5);border-radius:14px;padding:10px 12px;margin-bottom:10px;font-size:13px}
+.ban button{color:var(--sky);white-space:nowrap}
+.toast{position:absolute;inset-inline:16px;bottom:84px;background:var(--te);color:#032a22;padding:10px 14px;border-radius:14px;font-weight:600;text-align:center;z-index:60}
+.toast.e{background:var(--co);color:#3a0508}
+.note{font-size:12px;color:var(--mu);margin:8px 2px}
+.sk{height:74px;border-radius:16px;margin-bottom:10px;background:var(--c1)}
+@media (prefers-reduced-motion:no-preference){.sk{background:linear-gradient(90deg,var(--c1) 25%,var(--c2) 50%,var(--c1) 75%);background-size:200% 100%;animation:sh 1.1s infinite}@keyframes sh{to{background-position:-200% 0}}}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding:6px 0 8px}
+.ck{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--bd);background:var(--c2);border-radius:99px;padding:3px 12px;font-size:13px}
+.ck input{width:auto!important;accent-color:var(--sky)}
+.car,.pr{background:var(--c2);border-radius:14px;padding:8px 10px;margin:8px 0}
+.car fieldset,.pr fieldset{margin:8px 0 0;background:var(--c1)}
+.btn.sm{min-height:36px;padding:6px 12px;font-size:13px;margin-bottom:6px}
+fieldset input:disabled{opacity:.4}
+[hidden]{display:none!important}
+.rec.off{--a:var(--mu);opacity:.62;border-style:dashed;background:transparent}
+.rec.off .m b{color:var(--mu);text-decoration:line-through}
+</style></head>
+<body><div id="app"></div>
+<script>
+const $=s=>document.querySelector(s),FA='۰۱۲۳۴۵۶۷۸۹';
+const toFa=s=>String(s).replace(/\d/g,d=>FA[d]);
+const nf=new Intl.NumberFormat('fa-IR',{maximumFractionDigits:2}),F=v=>nf.format(v);
+const unFa=s=>String(s).replace(/[۰-۹]/g,d=>FA.indexOf(d)).replace(/[٬,،\s]/g,'').replace(/٫/g,'.');
+const N=v=>parseFloat(unFa(v))||0;
+const esc=s=>String(s??'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+const jal=d=>{const p=Object.fromEntries(new Intl.DateTimeFormat('en-u-ca-persian',{year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(d).map(x=>[x.type,x.value]));return p.year+'/'+p.month+'/'+p.day};
+const sv=p=>`<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+const I={home:'<path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/>',db:'<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/>',chart:'<path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/>',menu:'<path d="M4 6h16M4 12h16M4 18h16"/>',trade:'<path d="M7 7h13l-3-3M17 17H4l3 3"/>',box:'<path d="M3 7l9-4 9 4v10l-9 4-9-4zM3 7l9 4 9-4M12 11v10"/>',fac:'<path d="M3 21V9l6 4V9l6 4V5h6v16zM7 17h2M13 17h2"/>',wal:'<path d="M3 7h16a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2zM3 7l2-3h12M16 14h2"/>',doc:'<path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h6M9 17h6"/>',chick:'<path d="M12 3c4 0 7 6 7 10a7 7 0 01-14 0c0-4 3-10 7-10z"/>',pill:'<path d="M10 14l4-4M7 17a4 4 0 010-6l4-4a4 4 0 016 6l-4 4a4 4 0 01-6 0z"/>',wheat:'<path d="M12 21V8M12 8c-3 0-4-2-4-4 3 0 4 2 4 4zm0 0c3 0 4-2 4-4-3 0-4 2-4 4zM12 14c-3 0-4-2-4-4M12 14c3 0 4-2 4-4"/>',tag:'<path d="M3 12V4h8l10 10-8 8zM7.5 8.5h.01"/>',chev:'<path d="M15 6l-6 6 6 6"/>',plus:'<path d="M12 5v14M5 12h14"/>',edit:'<path d="M4 20h4L19 9l-4-4L4 16zM13 7l4 4"/>',trash:'<path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/>',x:'<path d="M6 6l12 12M18 6L6 18"/>',up:'<path d="M12 16V4M7 9l5-5 5 5M4 20h16"/>',down:'<path d="M12 4v12M7 11l5 5 5-5M4 20h16"/>',ret:'<path d="M9 14L4 9l5-5M4 9h10a6 6 0 010 12h-3"/>',fwd:'<path d="M9 6l6 6-6 6"/>'};
+const ic=n=>sv(I[n]);
+// ---------- data (sample) ----------
+const CUS={'کشتارگاه نمونه':['تهران','ری'],'پروتئین نمونه':['کرج','قزوین'],'مرغ‌فروشی نمونه':['شهریار']};
+const DRV={'محمد رضایی':'وانت نیسان ۲۲ ایران ۳۴۵ ۱۱','حسین کاظمی':'کامیون ۱۸ ایران ۷۷۸ ۴۴'};
+const P_old=[{id:1,name:'دوره پاییز ۱۴۰۵',cur:1,start:'2026-09-26',first:'2026-09-28',end:null,init:0,loss:412,wage:18000000,oth:6500000,pt:[['علی احمدی',30],['رضا کریمی',20]]},
+{id:2,name:'دوره تابستان ۱۴۰۵',cur:0,start:'2026-06-20',first:'2026-06-22',end:'2026-08-15',init:500,loss:640,wage:21000000,oth:9000000,pt:[['علی احمدی',25]]},
+{id:3,name:'دوره بهار ۱۴۰۵',cur:0,start:'2026-03-25',first:'2026-03-27',end:'2026-05-20',init:0,loss:0,wage:0,oth:0,pt:[]}];
+let uid=1;const DB={0:{},1:{},2:{},3:{},4:{}};const P=DB[0].cyc=[];
+const add=(p,k,r)=>{const id=uid++;(DB[p][k]=DB[p][k]||[]).push({id,...r});return id};
+[['دوره پاییز ۱۴۰۵','open','1405/07/06','1405/08/21',0,412,18000000,6500000,[{n:'علی احمدی',pct:30,basis:'combo',fs:60,fw:40,hist:[{d:'1405/07/06',pct:25,basis:'sale',fs:0,fw:0},{d:'1405/08/01',pct:30,basis:'combo',fs:60,fw:40}]},{n:'رضا کریمی',pct:20,basis:'sale',fs:0,fw:0,hist:[{d:'1405/07/06',pct:20,basis:'sale',fs:0,fw:0}]}],['دکتر سعید نوری']],
+['دوره تابستان ۱۴۰۵','settled','1405/04/01','1405/05/25',500,640,21000000,9000000,[{n:'علی احمدی',pct:25,basis:'weight',fs:0,fw:0,hist:[{d:'1405/04/01',pct:25,basis:'weight',fs:0,fw:0}]}],['دکتر مریم صادقی']],
+['دوره بهار ۱۴۰۵','closed','1405/01/10','1405/03/04',0,0,0,0,[],[]],
+['دوره زمستان ۱۴۰۵','draft','1405/08/15','1405/10/05',0,0,0,0,[],[]]].forEach(([name,st,start,hv,init,loss,wage,oth,pt,vets])=>add(0,'cyc',{name,st,start,first:start,hv,age:0,init,loss,wage,oth,pt,vets,note:'',snap1:st=='closed'||st=='settled'?hv:'',snap2:st=='settled'?hv:''}));
+const pp=(name,roles,x={})=>add(0,'ppl',{name,roles,tel:'',mob:'',addr:'',note:'',sups:[],cars:[],dests:'',...x});
+pp('شرکت جوجه یک‌روزه آسمان',['تأمین‌کننده'],{sups:['جوجه یک‌روزه']});pp('داروسازی دامپروران',['تأمین‌کننده'],{sups:['دارو و واکسن']});
+pp('کارخانه خوراک پارس',['تأمین‌کننده'],{sups:['خوراک','مواد اولیه (خوراک کارمزدی)']});pp('شرکت پخش نهاده‌های دامی',['تأمین‌کننده'],{sups:['تولید خوراک کارمزدی (دریافت‌کننده کارمزد ساخت)']});
+pp('کشتارگاه نمونه',['مشتری'],{addr:'تهران',dests:'تهران\nری'});pp('پروتئین نمونه',['مشتری'],{addr:'کرج',dests:'کرج\nقزوین'});pp('مرغ‌فروشی نمونه',['مشتری'],{addr:'شهریار',dests:'شهریار'});
+pp('محمد رضایی',['راننده'],{cars:[{t:'وانت نیسان',p:'۲۲ ایران ۳۴۵ ۱۱',n:''}]});pp('حسین کاظمی',['راننده'],{cars:[{t:'کامیون',p:'۱۸ ایران ۷۷۸ ۴۴',n:''},{t:'وانت',p:'۱۲ ایران ۱۲۳ ۲۲',n:''}]});
+pp('دکتر سعید نوری',['دامپزشک']);pp('دکتر مریم صادقی',['دامپزشک']);pp('علی احمدی',['شریک']);pp('رضا کریمی',['شریک']);
+pp('کارگر نمونه',['پرسنل'],{wage:1500000,pst:'فعال',ph:[{d:'1405/07/01',st:'فعال'}]});
+const SD=(k,s)=>s.split('|').forEach(name=>add(0,k,{name}));
+SD('ichick','راس|آرین');SD('ifeed','سوپر استارتر (استارتر)|پیش دان|میان دان|پس دان|پس دان 2');SD('iload','کیسه|فله');SD('iraw','ذرت|سویا|روغن|کنسانتره|سایر دارو');SD('iloss','تلفات سالن|تلفات مسیر حمل|ضایعات|سایر');
+SD('idrug','انرو فلوکساسن|فلور تک|تیامولین(05/2027)|فوزبک (بدسون)(2027)|فوزبک (رویان)|اریترومایسین(زند)(04/1406)|کلی سیرو (کلستین)|تیل مایکوزین 0.250 سی سی|تیل مایکوزین 0.5 لیتری|پودرکولیدم(03/2027)|داکسی سنداکس(07/2027)|تی اس|دانو فلوکساسین|برم هگزین از رحمتی(برونکو زند)(08/1405)|فارما هگزین(برم هگزین +منتول)|برونشی مکس|شربت آموکسی سیلین(250 سی سی)|منتورکس|قرص کوآموکسی کلاو|قرص کوآموکسی کلاو از قنائی|قرص کوآموکسی سیلین|ویتابین 100|جنتامایسین|لینکومایسین|میکس اویل|پولموسیلور|بایوژن(02/2027)|آلفا سلن|ای سلنیوم(سلنا ویت)|ای سلنیوم(آلفا زند)(11/1406)|ویتامین دکس|کیمیا پلاس|ب کمپلکس -الکارنتین|ب-کمپلکس اسید آمینه|ب-کمپلکس اسید آمینه خارجی|آمینوویت (اسید آمینه)|ad3eck|(ویگر)ad3ek|مینراسول|الیگو|آسپرین +ویتامین سی|سی ویت پلاس -الکترولیت|الکترولیت(ویدا)|هپارنال (اسپانیا)(12/2026)|پرومتور(12/2026)|روکیپو|پرولیور|آی سی مکس 200|نفروسول|نوالیور|تولترازوریل بهرود|تولترازوریل آفاق|سولفاکلوزاین(05/1405)|دیاوردین|نئومایسین (وتاک)(12/1406)|فرمالکس|زیکس ویروکس (5 لیتری)|ضد عفونی هموکسل لیکویید(5 لیتری)|محلول هواسان (5 لیتری)|نانو بیوساید 5 لیتری(پراسیتیک)|آکوا زیکس پلاس 5 لیتری(ضدعفونی داخل آب)|سود مایع 16 لیتری(میلکوکلین)آبی رنگ|اسید مایع 16 لیتری(لایموکلین) سبز رنگ|اندسید(اسیدی فایر)10 لیتری|انسیدخارجی از دکتررحمتی|واتر گارد|فرمالین 20 لیتری');
+add(0,'farm',{name:'مرغداری نمونه',city:'تهران، ری',addr:'',tel:'',mob:'',tech:'',nid:'',note:''});
+add(0,'hall',{name:'سالن ۱',cap:12000,area:800,note:''});add(0,'hall',{name:'سالن ۲',cap:10000,area:650,note:''});
+add(0,'acct',{bank:'بانک نمونه',branch:'',acc:'',card:'',sheba:'',owner:'مرغداری نمونه',note:''});
+add(0,'wh',{name:'انبار دان',wtype:'خوراک',wcap:30000,keeper:'کارگر نمونه',note:''});add(0,'wh',{name:'انبار دارو',wtype:'دارو و واکسن',wcap:0,keeper:'',note:''});
+add(0,'bskt',{we:600,wf:25});
+add(1,'chick',{date:'1405/07/06',sup:'شرکت جوجه یک‌روزه آسمان',type:'راس ۳۰۸',qty:12000,ins:150,fee:21000,frt:3500000,drv:'محمد رضایی'});
+add(1,'drug',{date:'1405/07/08',sup:'داروسازی دامپروران',type:'واکسن نیوکاسل',qty:12000,fee:350,frt:0});
+add(1,'drug',{date:'1405/07/20',sup:'داروسازی دامپروران',type:'آنتی‌بیوتیک',qty:40,fee:480000,frt:600000});
+add(1,'feed',{date:'1405/07/06',sup:'کارخانه خوراک پارس',type:'پیش‌دان',ltype:'فله',qty:12000,fee:24000,frt:2500000,drv:'حسین کاظمی'});
+add(1,'feed',{date:'1405/07/22',sup:'کارخانه خوراک پارس',type:'میان‌دان',ltype:'فله',qty:18000,fee:23500,frt:3500000,drv:'حسین کاظمی'});
+add(1,'wage',{date:'1405/07/28',sup:'شرکت پخش نهاده‌های دامی',type:'پس‌دان',ltype:'فله',qty:20000,fee:3800,frt:3000000,drv:'محمد رضایی'});
+add(1,'raw',{date:'1405/07/28',sup:'کارخانه خوراک پارس',mat:'ذرت',qty:15000,fee:15000,frt:2000000});
+const s1=add(1,'sale',{date:'1405/08/15',cus:'کشتارگاه نمونه',dst:'تهران',qty:14200,bsk:620,fee:98000,lc:1500000,frt:5000000,drv:'محمد رضایی'});
+add(1,'sale',{date:'1405/08/18',cus:'پروتئین نمونه',dst:'کرج',qty:14800,bsk:640,fee:98500,lc:1500000,frt:4500000,drv:'حسین کاظمی'});
+add(1,'retSale',{date:'1405/08/18',ref:s1,rk:'sale',qty:229,bsk:10,why:'خرابی بار در مسیر'});
+add(2,'chick',{date:'1405/04/01',sup:'شرکت جوجه یک‌روزه آسمان',type:'کاب ۵۰۰',qty:10000,ins:140,fee:19000,frt:2800000,drv:'محمد رضایی'});
+add(2,'feed',{date:'1405/04/02',sup:'کارخانه خوراک پارس',type:'پیش‌دان',ltype:'فله',qty:25000,fee:21000,frt:3000000});
+add(2,'wage',{date:'1405/04/20',sup:'شرکت پخش نهاده‌های دامی',type:'میان‌دان',ltype:'فله',qty:15000,fee:3500,frt:2000000});
+add(2,'sale',{date:'1405/05/22',cus:'مرغ‌فروشی نمونه',dst:'شهریار',qty:21000,bsk:900,fee:82000,lc:1000000,frt:3500000,drv:'حسین کاظمی'});
+{const NM={'راس ۳۰۸':'راس','کاب ۵۰۰':'آرین','واکسن نیوکاسل':'انرو فلوکساسن','آنتی‌بیوتیک':'جنتامایسین','پیش‌دان':'پیش دان','میان‌دان':'میان دان','پس‌دان':'پس دان'};for(const g in DB)for(const k in DB[g])DB[g][k].forEach(r=>{if(NM[r.type])r.type=NM[r.type]})}
+// ---------- model ----------
+const O=new Set(['note','drv','frt','ins','lc','bsk','veh','tel','mob','addr','city','tech','nid','area','branch','acc','card','sheba','wcap','keeper','dests','bon','vets']);
+const date=['date','تاریخ','d'],sup=['sup','عرضه‌کننده','t','مثال: شرکت پخش نهاده‌های دامی'],qty=['qty','مقدار','n','مثال: ۱۲٬۵۰۰'],frt=['frt','هزینه حمل','n','مثال: ۲٬۵۰۰٬۰۰۰'],drv=['drv','راننده','sv'],fee=['fee','فی','n','مثال: ۲۴٬۰۰۰'],note=['note','توضیحات تکمیلی','a','مثال: تحویل محموله طبق سفارش دوره جاری'],lt=['ltype','نوع بارگیری','t','مثال: فله'];
+const K={
+chick:{t:'خرید جوجه',ic:'chick',col:'am',p:'sup',u:'قطعه',L:'بهای تمام‌شده خرید جوجه',f:[date,sup,['type','نوع جوجه','t','مثال: راس ۳۰۸'],qty,['ins','بیمه جوجه','n','مثال: ۱۵۰'],fee,frt,drv,note]},
+drug:{t:'خرید دارو و واکسن',ic:'pill',col:'te',p:'sup',L:'بهای تمام‌شده خرید دارو',f:[date,sup,['type','نوع دارو','t','مثال: واکسن نیوکاسل'],qty,fee,frt,note]},
+feed:{t:'خوراک خریداری‌شده',ic:'wheat',col:'sky',p:'sup',L:'بهای تمام‌شده خرید دان',f:[date,sup,['type','نوع خوراک','t','مثال: پیش‌دان'],lt,qty,fee,frt,drv,note]},
+wage:{t:'خوراک کارمزدی',ic:'wheat',col:'vi',p:'sup',L:'بهای تمام‌شده خوراک کارمزدی',f:[date,sup,['type','نوع خوراک','t','مثال: میان‌دان'],lt,qty,['fee','بهای کارمزد','n','مثال: ۳٬۸۰۰'],frt,drv,note]},
+raw:{t:'مواد اولیه مصرفی کارمزدی',ic:'box',col:'co',p:'sup',L:'بهای مصرف مواد اولیه',f:[date,['sup','طرف تولید','t','مثال: کارخانه خوراک پارس'],['mat','مواد اولیه','t','مثال: ذرت'],qty,['fee','بهای واحد','n','مثال: ۱۵٬۰۰۰'],frt,['cost','بهای مصرف مواد اولیه','c'],note]},
+sale:{t:'فروش',ic:'tag',col:'te',p:'cus',u:'کیلوگرم',L:'خالص فروش',f:[date,['cus','مشتری','sc'],['dst','مقصد','sd'],['qty','مقدار (کیلوگرم)','n','مثال: ۱۴٬۲۰۰'],['bsk','تعداد سبد','n','مثال: ۶۲۰'],['fee','قیمت واحد','n','مثال: ۹۸٬۰۰۰'],['lc','هزینه بارگیری','n','مثال: ۱٬۵۰۰٬۰۰۰'],frt,drv,note]},
+retBuy:{t:'بازگشت از خرید',ic:'ret',col:'am',f:[['date','تاریخ برگشت','d'],['ref','رکورد خرید مرجع','r'],['qty','مقدار برگشتی','n','مثال: ۵۰۰'],['why','علت برگشت','t','مثال: مغایرت با سفارش'],note]},
+retSale:{t:'بازگشت از فروش',ic:'ret',col:'co',u:'کیلوگرم',pair:['qty','bsk'],f:[['date','تاریخ برگشت','d'],['ref','رکورد فروش مرجع','r'],['qty','مقدار برگشتی (کیلوگرم)','n','مثال: ۲۲۹'],['bsk','تعداد سبد برگشتی','n','مثال: ۱۰'],['why','علت برگشت','t','مثال: خرابی بار در مسیر'],note]},
+exp:{t:'سند هزینه',ic:'doc',col:'co',f:[date,['amt','مبلغ','n','مثال: ۴٬۵۰۰٬۰۰۰'],note]},
+inc:{t:'سند درآمد',ic:'doc',col:'te',f:[date,['amt','مبلغ','n','مثال: ۴٬۵۰۰٬۰۰۰'],note]}};
+const T={chick:r=>r.qty*(r.fee+(r.ins||0)),drug:r=>r.qty*r.fee,feed:r=>r.qty*r.fee,wage:r=>r.qty*r.fee,raw:r=>r.qty*r.fee,sale:r=>r.qty*r.fee};
+const cost=(k,r)=>k=='sale'?T.sale(r)-(r.lc||0)-(r.frt||0):T[k](r)+(r.frt||0);
+const BUY=['chick','drug','feed','wage','raw'],SECN={home:'خانه',base:'اطلاعات پایه',trade:'تبادلات تجاری',wh:'تبادلات انبار',prod:'تبادلات تولید',tre:'تبادلات خزانه',fin:'تبادلات مالی',rep:'گزارش‌های دوره'};
+// ---------- base info ----------
+const ROLES=['تأمین‌کننده','مشتری','راننده','پرسنل','دامپزشک','شریک','سایر'];
+const STY={'جوجه یک‌روزه':'chick','دارو و واکسن':'drug','خوراک':'feed','مواد اولیه (خوراک کارمزدی)':'raw','تولید خوراک کارمزدی (دریافت‌کننده کارمزد ساخت)':'wage'};
+const BAS={sale:'بر اساس فروش',weight:'بر اساس وزن',combo:'ترکیبی از فروش و وزن'};
+const STN={draft:'پیش‌نویس',open:'باز',ready:'آماده بستن',closed:'بسته شده',settled:'تسویه شده و قفل'},isEnd=p=>p.st=='closed'||p.st=='settled';
+const WT=['دارو و واکسن','خوراک','مواد اولیه','خوراک کارمزدی','ترکیبی از این موارد','سایر','مشخص نیست'];
+const BM={farm:'farm',hall:'farm',cyc:'farm',ppl:'ppl',acct:'acct',wh:'wh',ichick:'items',idrug:'items',ifeed:'items',iload:'items',iraw:'items',iloss:'items',bskt:'items'};
+const nz=s=>unFa(s).split('/').map(x=>x.padStart(2,'0')).join('/');
+const j2g=s=>{const m=unFa(s).split('/').map(Number);if(m.length!=3||m.some(x=>!x))return null;const key=nz(s);let t=new Date(m[0]+621,2,10,12);for(let i=0;i<420;i++,t=new Date(+t+864e5))if(jal(t)==key)return t;return null};
+const pAge=p=>{const s=j2g(p.start);if(!s)return 0;const e=p.st=='draft'?s:isEnd(p)?(j2g(p.hv)||new Date()):new Date();return Math.max(0,Math.floor((e-s)/864e5))};
+P.forEach(p=>{p.age=Math.round((j2g(p.hv)-j2g(p.start))/864e5);if(p.st=='open'&&nz(p.hv)<jal(new Date()))p.st='ready'});
+const PLs=()=>(DB[0].ppl||[]).filter(p=>!p.off),byRole=ro=>PLs().filter(p=>p.roles.includes(ro)).map(p=>p.name),pOf=n=>(DB[0].ppl||[]).find(p=>p.name==n);
+const cars=n=>(pOf(n)||{}).cars||[],dests=n=>((pOf(n)||{}).dests||'').split('\n').map(s=>s.trim()).filter(Boolean),carL=c=>c.t+' '+c.p;
+const SUP={chick:'chick',drug:'drug',feed:'feed',wage:'wage',raw:'wage,raw'},TYP={chick:'ichick',drug:'idrug',feed:'ifeed',wage:'ifeed'};
+for(const k of [...BUY,'sale'])K[k].f=K[k].f.flatMap(d=>d[0]=='sup'?[[d[0],d[1],'sp:'+SUP[k]]]:d[0]=='type'?[[d[0],d[1],'si:'+TYP[k]]]:d[0]=='ltype'?[[d[0],d[1],'si:iload']]:d[0]=='mat'?[[d[0],d[1],'si:iraw']]:d[0]=='drv'?[[d[0],d[1],'sv'],['veh','خودرو','sk']]:[d]);
+const IT=(t,ic,col,ex)=>({g:1,t,ic,col,p:'name',f:[['name','عنوان','t','مثال: '+ex]]});
+Object.assign(K,{
+farm:{g:1,max1:1,nodel:1,t:'مشخصات مرغداری',ic:'home',col:'am',p:'name',s:r=>r.city,f:[['name','نام مرغداری','t','مثال: مرغداری نمونه'],['city','استان و شهر','t','مثال: تهران، ری'],['addr','آدرس دقیق','a','مثال: جاده ...، کیلومتر ...'],['tel','شماره تماس ثابت','t','مثال: ۰۲۱۱۲۳۴۵۶۷۸'],['mob','شماره همراه مدیریت','t','مثال: ۰۹۱۲۱۲۳۴۵۶۷'],['tech','مشخصات مسئول فنی','t','مثال: نام و شماره تماس'],['nid','شناسه ملی / کد اقتصادی','t','مثال: ۱۰۱۰۱۲۳۴۵۶۷'],note]},
+hall:{g:1,t:'سالن',ic:'fac',col:'sky',p:'name',s:r=>'ظرفیت '+F(r.cap)+' قطعه',f:[['name','نام یا شماره سالن','t','مثال: سالن ۱'],['cap','ظرفیت استاندارد جوجه‌ریزی (قطعه)','n','مثال: ۱۲٬۰۰۰'],['area','متراژ (متر مربع)','n','مثال: ۸۰۰'],note]},
+cyc:{g:1,t:'دوره',ic:'chart',col:'te',p:'name',s:r=>toFa(r.start)+' تا '+toFa(r.hv),pair:['hv','age'],f:[['name','عنوان دوره','t','مثال: دوره دوم ۱۴۰۵'],['start','تاریخ شروع (جوجه‌ریزی)','d'],['hv','تاریخ برداشت / تخلیه مورد انتظار','d'],['age','سن کشتار / سن دوره (روز)','n','مثال: ۴۵'],note,['vets','دامپزشکان ناظر دوره','m','vets'],['ptn','شرکای دوره','ptn']]},
+ppl:{g:1,t:'شخص / طرف تجاری',ic:'db',col:'vi',p:'name',s:r=>(r.roles||[]).join('، '),f:[['name','نام / عنوان شرکت','t','مثال: شرکت پخش نهاده‌های دامی'],['tel','شماره تماس','t','مثال: ۰۲۱۱۲۳۴۵۶۷۸'],['mob','شماره همراه','t','مثال: ۰۹۱۲۱۲۳۴۵۶۷'],['addr','آدرس','a','مثال: تهران، خیابان ...'],note,['roles','نقش‌ها','m',ROLES],['sups','انواع تأمین','m',Object.keys(STY),'تأمین‌کننده'],['dests','مقاصد مشتری (هر مقصد در یک خط)','a','مثال: تهران','مشتری'],['cars','خودروهای راننده','cars','','راننده'],['wage','دستمزد روزانه پیش‌فرض','n','مثال: ۱٬۵۰۰٬۰۰۰','پرسنل'],['pst','وضعیت فعلی','sl',['فعال','غیرفعال'],'پرسنل'],['pdate','تاریخ شروع این وضعیت','d','','پرسنل']]},
+acct:{g:1,t:'حساب بانکی',ic:'wal',col:'te',p:'bank',s:r=>r.owner,f:[['bank','نام بانک','t','مثال: بانک نمونه'],['branch','نام شعبه / کد شعبه','t','مثال: شعبه مرکزی / ۱۲۳'],['acc','شماره حساب','t','مثال: ۱۲۳۴۵۶۷۸۹'],['card','شماره کارت','t','مثال: ۶۰۳۷۹۹۷۱۲۳۴۵۶۷۸۹'],['sheba','شماره شبا','t','مثال: IR۱۲۰۱۲۳۴۵۶۷۸۹۰۱۲۳۴۵۶۷۸۹۰'],['owner','نام صاحب حساب','t','مثال: مرغداری نمونه'],note]},
+wh:{g:1,t:'انبار',ic:'box',col:'am',p:'name',s:r=>r.wtype,f:[['name','نام انبار','t','مثال: انبار دان'],['wtype','نوع اقلام نگهداری‌شده','sl',WT],['wcap','ظرفیت','n','مثال: ۳۰٬۰۰۰'],['keeper','مسئول انبار','sa'],note]},
+ichick:IT('نژاد جوجه','chick','am','راس'),idrug:IT('دارو و واکسن','pill','te','جنتامایسین'),ifeed:IT('نوع خوراک','wheat','sky','پیش دان'),iload:IT('نوع بارگیری','box','vi','فله'),iraw:IT('ماده اولیه','box','co','ذرت'),iloss:IT('نوع تلفات و ضایعات','trash','co','تلفات سالن'),
+bskt:{g:1,max1:1,nodel:1,t:'سبد',ic:'box',col:'sky',s:r=>'خالص تقریبی '+K.bskt.cf(r)+' کیلوگرم',cf:v=>v.wf?F(+(v.wf-(v.we||0)/1000).toFixed(3)):'—',f:[['we','وزن سبد خالی (گرم)','n','مثال: ۶۰۰'],['wf','وزن تقریبی سبد پر (کیلوگرم)','n','مثال: ۲۵'],['net','وزن خالص تقریبی سبد (کیلوگرم)','c']]}});
+const REF={ppl:[[BUY,'sup'],[['sale'],'cus'],[[...BUY,'sale'],'drv']],ichick:[[['chick'],'type']],idrug:[[['drug'],'type']],ifeed:[[['feed','wage'],'type']],iload:[[['feed','wage'],'ltype']],iraw:[[['raw'],'mat']]};
+const LBL={sup:'تبادلات تجاری: خرید',cus:'تبادلات تجاری: فروش',drv:'تبادلات تجاری: راننده',type:'تبادلات تجاری: خرید',ltype:'تبادلات تجاری: خرید',mat:'تبادلات تجاری: مواد اولیه'};
+function usage(k,r){const u=new Set(),n=r.name;for(const[ks,f]of REF[k]||[])for(const p of P)for(const kk of ks)if((DB[p.id][kk]||[]).some(x=>x[f]==n))u.add(LBL[f]+' ('+p.name+')');
+if(k=='ppl'){P.forEach(p=>{if((p.vets||[]).includes(n)||(p.pt||[]).some(x=>x.n==n))u.add('دوره: '+p.name)});if((DB[0].wh||[]).some(w=>w.keeper==n))u.add('انبارها')}
+if(k=='cyc'){if(Object.values(DB[r.id]||{}).some(a=>a.length))u.add('رکوردهای ثبت‌شده در همین دوره');if(P.length<2)u.add('تنها دوره موجود')}return[...u]}
+function rename(k,o,n){for(const[ks,f]of REF[k]||[])for(const p of P)for(const kk of ks)(DB[p.id][kk]||[]).forEach(x=>{if(x[f]==o)x[f]=n});if(k=='ppl'){P.forEach(p=>{p.vets=(p.vets||[]).map(x=>x==o?n:x);(p.pt||[]).forEach(x=>{if(x.n==o)x.n=n})});(DB[0].wh||[]).forEach(w=>{if(w.keeper==o)w.keeper=n})}}
+function prep(k,v,old){const td=jal(new Date());if(old&&REF[k]&&old.name!=v.name)rename(k,old.name,v.name);
+if(k=='ppl'&&v.roles.includes('پرسنل')){const h=(old&&old.ph||[]).slice(),l=h[h.length-1];if(!l||l.st!=v.pst)h.push({d:v.pdate||td,st:v.pst});v.ph=h}
+if(k=='cyc'){const op=(old&&old.pt)||[];v.pt=v.ptn.map(x=>{const o=op.find(z=>z.n==x.n),hs=o?o.hist.slice():[];if(!o||o.pct!=x.pct||o.basis!=x.basis||(x.basis=='combo'&&(o.fs!=x.fs||o.fw!=x.fw)))hs.push({d:td,pct:x.pct,basis:x.basis,fs:x.fs,fw:x.fw});return{...x,hist:hs}});delete v.ptn;if(!old)Object.assign(v,{st:'draft',first:v.start,init:0,loss:0,wage:0,oth:0})}}
+const chips=(n,o,v)=>{o=[...new Set([...o,...(v||[])])];return `<div class="chips">${o.map(x=>`<label class="ck"><input type="checkbox" name="${n}" value="${esc(x)}" ${(v||[]).includes(x)?'checked':''}>${x}${n=='vets'&&pOf(x)?`<button type="button" class="lnk" data-a="det" data-id="${pOf(x).id}">جزئیات</button>`:''}</label>`).join('')||'<span class="note">موردی در اطلاعات پایه ثبت نشده است.</span>'}</div>`};
+const carRow=c=>`<div class="car"><fieldset><legend>نوع خودرو</legend><input data-c="t" value="${esc(c.t)}" placeholder="مثال: وانت نیسان"></fieldset><fieldset><legend>شماره پلاک</legend><input data-c="p" value="${esc(c.p)}" placeholder="مثال: ۲۲ ایران ۳۴۵ ۱۱"></fieldset><fieldset><legend>توضیحات تکمیلی</legend><input data-c="n" value="${esc(c.n)}" placeholder="در صورت نیاز"></fieldset><button type="button" class="ib dan" data-a="rmcar">${ic('trash')} حذف خودرو</button></div>`;
+const carsH=v=>`<div class="cars">${(v||[]).map(carRow).join('')}</div><button type="button" class="btn gh sm" data-a="addcar">${ic('plus')} افزودن خودرو</button>`;
+function ptnH(v){const sel=n=>(v||[]).find(x=>x.n==n),names=[...new Set([...byRole('شریک'),...(v||[]).map(x=>x.n)])];if(!names.length)return'<span class="note">هنوز شریکی با نقش «شریک» در اطلاعات پایه ثبت نشده است.</span>';
+return names.map(n=>{const s=sel(n)||{},b=s.basis||'sale';return `<div class="pr"><label class="ck"><input type="checkbox" data-p="on" value="${esc(n)}" ${sel(n)?'checked':''}>${n}</label><div class="pi" hidden><div class="two"><fieldset><legend>درصد شراکت</legend><input data-p="pct" inputmode="decimal" placeholder="مثال: ۳۰" value="${s.pct?F(s.pct):''}"></fieldset><fieldset><legend>مبنای تسویه</legend><select data-p="basis">${Object.entries(BAS).map(([k,l])=>`<option value="${k}" ${k==b?'selected':''}>${l}</option>`).join('')}</select></fieldset></div><div class="two cb" hidden><fieldset><legend>سهم مبنای فروش (درصد)</legend><input data-p="fs" inputmode="decimal" placeholder="مثال: ۶۰" value="${s.fs?F(s.fs):''}"></fieldset><fieldset><legend>سهم مبنای وزن (درصد)</legend><input data-p="fw" inputmode="decimal" placeholder="مثال: ۴۰" value="${s.fw?F(s.fw):''}"></fieldset></div></div></div>`}).join('')}
+function srcOpts(t,ph,r){if(t=='sc')return byRole('مشتری');if(t=='sd')return dests(r.cus);if(t=='sv')return byRole('راننده');if(t=='sk')return cars(r.drv).map(carL);if(t=='sa')return byRole('پرسنل');
+if(t.startsWith('sp:')){const ty=t.slice(3).split(',');return PLs().filter(p=>p.roles.includes('تأمین‌کننده')&&(p.sups||[]).some(s=>ty.includes(STY[s]))).map(p=>p.name)}
+if(t.startsWith('si:'))return(DB[0][t.slice(3)]||[]).filter(x=>!x.off).map(x=>x.name);return ph||[]}
+function base_upd(fm,ev,k){const E=fm.elements,nm=ev&&ev.target.name;
+if(k=='ppl'){const rl=[...fm.querySelectorAll('input[name=roles]:checked')].map(e=>e.value);fm.querySelectorAll('[data-role]').forEach(d=>d.hidden=!rl.includes(d.dataset.role));
+const ad=E.addr,ds=E.dests;if(ad&&ds){if(fm.dataset.pa===undefined)fm.dataset.pa=ad.value.trim();const pa=fm.dataset.pa,a=ad.value.trim(),ls=ds.value.split('\n');if(nm=='addr'||(nm=='roles'&&!ds.value.trim())){if(!ds.value.trim()||ls[0].trim()==pa){ls[0]=a;ds.value=ls.join('\n').replace(/^\n+/,'')}fm.dataset.pa=a}}}
+if(k=='wh'){const en=WT.slice(0,4).includes(E.wtype.value);E.wcap.disabled=!en;if(!en)E.wcap.value=''}
+if(k=='cyc'){fm.querySelectorAll('.pr').forEach(e=>{const on=e.querySelector('[data-p=on]').checked;e.querySelector('.pi').hidden=!on;e.querySelector('.cb').hidden=!(on&&e.querySelector('[data-p=basis]').value=='combo')});
+
+if(nm=='start'||nm=='hv'||nm=='age'){const s=j2g(E.start.value),h=j2g(E.hv.value),a=N(E.age.value);if(s){if(nm=='age'){if(a>0)E.hv.value=toFa(jal(new Date(+s+a*864e5)))}else if(h)E.age.value=F(Math.round((h-s)/864e5));else if(a>0)E.hv.value=toFa(jal(new Date(+s+a*864e5)))}}}}
+const lock=()=>{const s=cur().st;return['draft','closed','settled'].includes(s)?s:null};
+const lockBan=()=>{const l=lock();return l?`<div class="ban" style="background:rgba(255,184,77,.1);border-color:rgba(255,184,77,.5)"><span>${{draft:'دوره در وضعیت پیش‌نویس است؛ تا زمانی که باز نشود، ثبت اطلاعات عملیاتی ممکن نیست.',closed:'دوره بسته شده است؛ برخی قابلیت‌های ثبت رکورد جدید در این وضعیت محدود می‌شود (جزئیات بعداً اعلام می‌شود).',settled:'دوره تسویه و قفل شده است؛ اطلاعات فقط‌خواندنی است.'}[l]}</span></div>`:''};
+const chkCard=p=>p.st=='closed'?'<div class="card"><b>چک‌لیست تسویه دوره</b><div class="note">فهرست اقدامات لازم برای تسویه در مشخصات تعریف نشده است؛ موارد آن پس از مشخص شدن اینجا نمایش داده می‌شود.</div></div>':'';
+const toolsH=k=>K[k].g?`<div class="tools"><button class="btn gh" style="grid-column:span 2" data-a="exp">${ic('down')} Export Excel</button></div>`:`<div class="tools"><button class="btn gh" data-a="imp">${ic('up')} Import Excel</button><button class="btn gh" data-a="exp">${ic('down')} Export Excel</button></div>`;
+function addBtn(k){const c=K[k];if(c.max1&&recs(k).length)return'';const fn=k=='exp'||k=='inc',dis=!c.g&&['draft','settled'].includes(lock());return `<button class="btn pr wide" ${dis?'disabled style="opacity:.45"':''} data-a="newf" data-k="${k}">${ic('plus')} ${fn?'صدور سند دستی':k=='cyc'?'ایجاد دوره جدید':c.max1?'ثبت اطلاعات':'ثبت رکورد جدید'}</button>`}
+function gcard(k,r){const c=K[k];return `<button class="rec c-${c.col}${r.off?' off':''}" data-a="det" data-id="${r.id}"><span class="ic">${ic(c.ic)}</span><span class="m"><b>${esc(r[c.p]||c.t)}</b><div>${c.s?c.s(r):''}</div></span>${r.off?'<span class="chip end">غیرفعال</span>':''}${k=='cyc'?`<span class="chip${isEnd(r)?' end':''}">${STN[r.st]}</span>`:''}${ic('chev')}</button>`}
+function gdet(id){const{k,r}=find(id),c=K[k],cy=k=='cyc',sd=cy&&r.st=='settled';let rw='';
+for(const[n,l,t,,ro]of c.f){if(t=='c'||n=='note'||t=='ptn')continue;if(ro&&!(r.roles||[]).includes(ro))continue;const v=r[n];
+rw+=t=='cars'?row(l,(v||[]).map(x=>esc(x.t)+' | '+esc(x.p)+(x.n?' | '+esc(x.n):'')).join('<br>')||'—'):row(l,t=='d'?toFa(v||'—'):t=='n'?(v?F(v):'—'):t=='m'?((v||[]).map(x=>n=='vets'&&pOf(x)?`<button class="lnk" data-a="det" data-id="${pOf(x).id}">${esc(x)}</button>`:esc(x)).join(n=='vets'?' ':'، ')||'—'):esc(v||'—'))}
+if(k=='bskt')rw+=row('وزن خالص تقریبی سبد (کیلوگرم)',c.cf(r))+'<div class="note">این مقادیر تقریبی‌اند و فقط برای مراجعه نگهداری می‌شوند؛ در هیچ محاسبه‌ای استفاده نمی‌شوند.</div>';
+if(k=='ppl'&&(r.ph||[]).length)rw+='<div class="sec">سوابق وضعیت</div>'+r.ph.map(x=>row(toFa(x.d),x.st)).join('');
+let bt='';
+if(cy){rw+=row('وضعیت دوره',`<span class="chip${isEnd(r)?' end':''}">${STN[r.st]}</span>`)+row('سن دوره (روز)',F(pAge(r)))+(r.snap1?row('Snapshot اول (پشتیبان)',toFa(r.snap1)):'')+(r.snap2?row('Snapshot دوم (نهایی)',toFa(r.snap2)):'')+'<div class="sec">شرکای دوره</div>'+((r.pt||[]).map(x=>`<div class="card" style="margin:8px 0"><b>${esc(x.n)}</b>${row('درصد شراکت',F(x.pct)+'٪')}${row('مبنای تسویه',BAS[x.basis]+(x.basis=='combo'?` (فروش ${F(x.fs)}٪ / وزن ${F(x.fw)}٪)`:''))}<div class="note">سوابق تغییرات: ${x.hist.map(h=>toFa(h.d)+': '+F(h.pct)+'٪ '+BAS[h.basis]).join(' ← ')}</div></div>`).join('')||'<div class="note">شریکی انتخاب نشده است.</div>');
+const nx={draft:[['open','باز کردن دوره']],open:[['ready','تغییر به آماده بستن']],ready:[['closed','بستن دوره']],closed:[['ready','بازگشایی مجدد (آماده بستن)'],['settled','تسویه و قفل']]}[r.st]||[],can=to=>to!='open'||nz(r.start)<=jal(new Date());
+bt=nx.length?`<div class="acts" style="grid-template-columns:1fr;margin-top:12px">${nx.map(([to,l])=>`<button class="btn ${to=='closed'||to=='settled'?'pr':'gh'}" ${can(to)?'':'disabled style="opacity:.45"'} data-a="cs" data-id="${id}" data-to="${to}">${l}</button>`).join('')}</div>${nx.some(x=>!can(x[0]))?'<div class="note">دوره پس از رسیدن به تاریخ شروع قابل باز شدن است.</div>':''}`:''}
+rw+=row('توضیحات تکمیلی',esc(r.note||'—'))+(r.off?row('وضعیت رکورد','<span class="chip end">غیرفعال</span>'):'');
+return `<div class="mh">${sd?'':`<button class="ib" data-a="edit" data-id="${id}">${ic('edit')} ویرایش</button>`}${c.nodel||sd?'':`<button class="ib dan" data-a="ask" data-id="${id}">${ic('trash')} حذف</button>`}${r.off?`<button class="ib" data-a="on" data-id="${id}">فعال‌سازی</button>`:''}<span class="sp"></span>${S.modal.length>1?`<button class="ib" data-a="back">${ic('fwd')}</button>`:''}<button class="ib" data-a="close">${ic('x')}</button></div><h3>${esc(r[c.p]||c.t)}</h3><div class="sub">${c.t}</div>${rw}${bt}`}
+function detail2(id){const x=find(id);if(!x)return'';if(K[x.k].g)return gdet(id);let h=detail(id);const l=lock();if(l=='draft'||l=='settled')h=h.replace(/<button class="ib" data-a="edit"[^]*?<\/button><button class="ib dan"[^]*?<\/button>/,'');return h}
+function ask2(id){const x=find(id);if(!K[x.k].g)return ask(id);const u=usage(x.k,x.r);
+return u.length?`<h3>حذف ممکن نیست</h3><p style="margin:8px 0;color:var(--mu)">این رکورد در بخش‌های زیر استفاده شده است:</p><ul style="padding-inline-start:20px;margin-bottom:8px">${u.map(z=>`<li>${esc(z)}</li>`).join('')}</ul><p style="color:var(--mu);margin-bottom:10px">فقط می‌توانید آن را غیرفعال کنید. رکورد غیرفعال در فرم‌های جدید قابل انتخاب نیست، اما اطلاعات تاریخی آن حفظ می‌شود.</p><div class="acts" style="grid-template-columns:1fr 1fr">${x.r.off?'':`<button class="btn pr" data-a="off" data-id="${id}">غیرفعال‌سازی</button>`}<button class="btn gh" data-a="back">انصراف</button></div>`:ask(id).replace('data-a="del"','data-a="delg"').replace('این رکورد از دوره و گزارش‌ها حذف می‌شود','این رکورد از اطلاعات پایه حذف می‌شود')}
+function cfm(m){const p=find(m.id).r,X={open:['باز کردن دوره','با باز شدن دوره، ثبت اطلاعات عملیاتی فعال می‌شود.'],ready:['تغییر وضعیت به «آماده بستن»','اطلاعات دوره برای بررسی و نهایی‌سازی آماده می‌شود.'],closed:['بستن دوره','برخی قابلیت‌های ثبت رکورد جدید محدود می‌شود (جزئیات بعداً اعلام می‌شود) و اولین Snapshot پشتیبان گرفته می‌شود.'],settled:['تسویه و قفل دوره','Snapshot نهایی گرفته می‌شود و اطلاعات دوره کاملاً فقط‌خواندنی می‌شود. این کار قابل بازگشت نیست.']}[m.to];
+return `<h3>${X[0]}؟</h3><p style="margin:8px 0 12px;color:var(--mu)">${esc(p.name)}: ${X[1]}</p><div class="acts" style="grid-template-columns:1fr 1fr"><button class="btn pr" data-a="cfmok" data-id="${m.id}" data-to="${m.to}">تأیید</button><button class="btn gh" data-a="back">انصراف</button></div>`}
+function base(){const t=S.sub.base,b=S.b2;let h=tabs([['farm','مرغداری و زیرساخت‌ها'],['ppl','اشخاص و طرف‌های تجاری'],['acct','حساب‌های بانکی'],['wh','انبارها'],['items','اقلام و تعاریف']],t,'sub');
+const L={farm:[['farm','مشخصات مرغداری'],['hall','سالن‌ها'],['cyc','دوره‌ها']],ppl:[['all','همه'],...ROLES.map(r=>[r,r])],items:[['ichick','نژاد جوجه'],['idrug','دارو و واکسن'],['ifeed','انواع خوراک'],['iload','انواع بارگیری'],['iraw','مواد اولیه'],['iloss','تلفات و ضایعات'],['bskt','سبد']]}[t];
+return h+(L?tabs(L,b[t],'b2','sb'):'')+page(L?(t=='ppl'?'ppl':b[t]):t)}
+const S={pid:1,sec:'home',sub:{trade:'buy',fin:'exp',rep:'sum',base:'farm'},b2:{farm:'farm',ppl:'all',bank:'acct',items:'ichick'},buy:'chick',form:null,modal:[],more:false,fo:false,ld:false,banner:null};
+const cur=()=>P.find(p=>p.id==S.pid);
+const recs=k=>(DB[K[k]&&K[k].g?0:S.pid][k]||[]).slice().sort((a,b)=>b.id-a.id);
+const find=id=>{for(const g of [S.pid,0])for(const k in DB[g]){const r=DB[g][k].find(r=>r.id==id);if(r)return{k,r}}return null};
+const sum=(k,fn)=>recs(k).reduce((a,r)=>a+fn(r),0);
+const na=w=>`<span class="na">غیرقابل محاسبه؛ ${w}</span>`;
+const avg=(a,b)=>b?F(a/b):na('مقدار صفر است.');
+function agg(){const p=cur(),place=p.init+sum('chick',r=>r.qty),net=place-p.loss,feed=sum('feed',r=>r.qty)+sum('wage',r=>r.qty),meat=sum('sale',r=>r.qty);
+const gross=sum('sale',r=>T.sale(r)),ld=sum('sale',r=>r.lc||0),fr=sum('sale',r=>r.frt||0),netS=gross-ld-fr;
+const ex=[['خرید جوجه',sum('chick',r=>cost('chick',r))],['دارو و واکسن',sum('drug',r=>cost('drug',r))],['خوراک خریداری‌شده',sum('feed',r=>cost('feed',r))],['خوراک کارمزدی',sum('wage',r=>cost('wage',r))],['مواد اولیه',sum('raw',r=>cost('raw',r))],['دستمزد',p.wage],['سایر هزینه‌ها',p.oth]];
+const texp=ex.reduce((a,x)=>a+x[1],0);
+return{p,place,loss:p.loss,net,feed,meat,gross,ld,fr,netS,ex,texp,pl:netS-texp,fcr:meat?Math.ceil(feed/meat*100-1e-9)/100:null,price:meat?netS/meat:null,cpk:meat?texp/meat:null}}
+// ---------- views ----------
+const tabs=(l,a,g,s='')=>`<div class="tw ${s}"><div class="ti">${l.map(([k,t])=>`<button class="tab${k==a?' on':''}" data-a="tab" data-g="${g}" data-v="${k}">${t}</button>`).join('')}</div><button class="ar" data-a="sc" hidden>${ic('chev')}</button></div>`;
+const row=(l,v,c='')=>`<div class="row"><span>${l}</span><b class="${c}">${v}</b></div>`;
+const dd=d=>toFa(d||'—');
+function home(){const a=agg(),p=a.p,age=pAge(p);
+const qa=[['sale','فروش','tag','te','trade','sale'],['feed','خوراک','wheat','sky','trade','buy'],['chick','جوجه','chick','am','trade','buy'],['drug','دارو و واکسن','pill','vi','trade','buy']];
+const last=Object.keys(K).filter(k=>BUY.includes(k)||['sale','retBuy','retSale'].includes(k)).flatMap(k=>recs(k).map(r=>({k,r}))).sort((x,y)=>y.r.id-x.r.id).slice(0,4);
+return `<div class="sec" style="margin-top:2px">داشبورد مدیریتی</div><div class="card dash"><div class="dh"><b>${p.name}</b><span class="chip${isEnd(p)?' end':''}">${STN[p.st]}</span></div>
+<div class="age">${F(age)}<small>روز سن دوره</small></div>
+<div class="g2"><div class="mini"><span>شروع دوره</span><b>${dd(p.start)}</b></div><div class="mini"><span>اولین جوجه‌ریزی</span><b>${dd(p.first)}</b></div>
+<div class="mini"><span>جوجه‌ریزی</span><b>${F(a.place)}</b></div><div class="mini"><span>مانده</span><b>${F(a.net)}</b></div>
+<div class="mini" style="grid-column:span 2"><span>تلفات و حذف</span><b class="neg">${F(a.loss)}</b></div></div></div>
+${chkCard(p)}<div class="sec">دسترسی سریع</div><div class="qa">${qa.map(q=>`<button data-a="go" data-k="${q[0]}"><span class="ic c-${q[3]}">${ic(q[2])}</span>${q[1]}</button>`).join('')}</div>
+<div class="sec">آخرین رکوردها</div>${last.length?last.map(x=>card(x.k,x.r)).join(''):empty()}
+<div class="note">داده‌های این نمونه اولیه نمایشی هستند و داده واقعی نیستند.</div>`}
+const empty=g=>`<div class="empty">${sv(I.doc).replace('22','44').replace('22','44')}<div>${g?'هنوز رکوردی ثبت نشده است.':'برای این دوره هنوز رکوردی ثبت نشده است.'}</div><div style="font-size:12.5px">با «ثبت رکورد جدید» شروع کنید.</div></div>`;
+const refLbl=r=>{const x=find(r.ref);return x?`${K[x.k].t}: ${x.r.sup||x.r.cus} (${toFa(x.r.date)})`:'رکورد مرجع'};
+function card(k,r){const c=K[k];if(c.g)return gcard(k,r);const ret=k.startsWith('ret'),fin=k=='exp'||k=='inc';
+const ttl=ret?refLbl(r):fin?(r.note||c.t):(r[c.p]||c.t),val=ret?F(r.qty):fin?F(r.amt):F(cost(k,r));
+const q=!ret&&!fin?F(r.qty)+(c.u?' '+c.u:''):ret?F(r.qty)+(c.u?' '+c.u:''):'';
+return `<button class="rec c-${c.col}" data-a="det" data-id="${r.id}"><span class="ic">${ic(c.ic)}</span><span class="m"><b>${esc(ttl)}</b><div><span>${toFa(r.date)}</span>${fin?'<span class="chip">دستی</span>':''}${q&&!ret?`<span>${q}</span>`:''}</div></span><span class="v">${ret?q:val}</span>${ic('chev')}</button>`}
+function st(k){const R=recs(k),n=R.length,s=fn=>R.reduce((a,r)=>a+fn(r),0),Q=s(r=>r.qty);
+if(k=='exp'||k=='inc')return{o:[['تعداد اسناد',F(n)],['مجموع مبلغ',F(s(r=>r.amt))]]};
+if(K[k].g)return{o:[['تعداد رکوردها',F(n)],['فعال',F(R.filter(r=>!r.off).length)]]};
+if(k.startsWith('ret'))return{o:[['تعداد رکوردها',F(n)],['مجموع مقدار برگشتی',F(Q)]]};
+if(k=='sale'){const G=s(r=>T.sale(r)),L=s(r=>r.lc||0),Fr=s(r=>r.frt||0);return{o:[['مجموع کیلوگرم فروش',F(Q)],['تعداد سبد',F(s(r=>r.bsk||0))],['تعداد رکوردهای فروش',F(n)]],m:[['فروش ناخالص',F(G)],['مجموع هزینه بارگیری',F(L)],['مجموع هزینه حمل',F(Fr)],['خالص فروش',F(G-L-Fr)]]}}
+const Tt=s(r=>T[k](r)),C=s(r=>cost(k,r)),Fr=s(r=>r.frt||0);
+if(k=='chick')return{o:[['تعداد کل جوجه خریداری‌شده',F(Q)],['تعداد رکوردهای خرید',F(n)]],m:[['مجموع خرید',F(Tt)],['مجموع هزینه حمل',F(Fr)],['بهای تمام‌شده',F(C)],['میانگین قیمت هر جوجه',avg(Tt,Q)],['میانگین بهای تمام‌شده هر جوجه',avg(C,Q)]]};
+const SL={drug:['مقدار کل دارو','مجموع خرید'],feed:['مقدار کل خوراک','مجموع بهای خرید'],wage:['مقدار کل خوراک','مجموع بهای کارمزد'],raw:['مقدار کل مواد اولیه','مجموع بهای مواد']}[k];
+return{o:[[SL[0],F(Q)],['تعداد رکوردها',F(n)]],m:[[SL[1],F(Tt)],['مجموع هزینه حمل',F(Fr)],['بهای تمام‌شده',F(C)],['میانگین بهای تمام‌شده هر واحد',avg(C,Q)]]}}
+function page(k){const c=K[k],R=recs(k).filter(r=>k!='ppl'||S.b2.ppl=='all'||r.roles.includes(S.b2.ppl)),X=st(k);
+let h=toolsH(k)+(c.g?'':lockBan());
+if(S.banner)h+=`<div class="ban"><span>${S.banner}</span><button data-a="imp">تلاش مجدد</button><button data-a="nb">${ic('x')}</button></div>`;
+h+=`<div class="stats">${X.o.map(([l,v])=>`<div class="stat"><span>${l}</span><b>${v}</b></div>`).join('')}</div>`;
+if(X.m)h+=`<button class="fo${S.fo?' open':''}" data-a="fo"><span>جزئیات مالی</span>${ic('chev')}</button>`+(S.fo?`<div class="card">${X.m.map(([l,v])=>row(l,v)).join('')}</div>`:'');
+if(k=='exp'||k=='inc')h+='<div class="note">اسناد حاصل از رویداد خزانه فقط از طریق همان رویداد تغییر می‌کنند. اینجا فقط اسناد دستی صادر و ویرایش می‌شوند.</div>';
+h+=(k=='bskt'?'<div class="note">وزن سبد فقط برای مراجعه است و در محاسبات فروش یا بازگشت از فروش استفاده نمی‌شود.</div>':k=='cyc'?'<div class="note">دوره جدید با وضعیت «پیش‌نویس» ساخته می‌شود و با رسیدن به تاریخ شروع می‌توانید آن را باز کنید.</div>':'')+(S.form&&S.form.k==k?formH(k,S.form.id):addBtn(k));
+return h+`<div class="lh">رکوردها <em>${F(R.length)}</em></div>`+(R.length?R.map(r=>card(k,r)).join(''):empty(c.g))}
+function trade(){const t=S.sub.trade;let h=tabs([['buy','خرید'],['sale','فروش'],['retBuy','بازگشت از خرید'],['retSale','بازگشت از فروش']],t,'sub');
+if(t=='buy')h+=tabs([['chick','جوجه'],['drug','دارو و واکسن'],['feed','خوراک خریداری‌شده'],['wage','خوراک کارمزدی'],['raw','مواد اولیه مصرفی کارمزدی']],S.buy,'buy','sb');
+return h+page(t=='buy'?S.buy:t)}
+const fin=()=>tabs([['exp','صدور سند هزینه'],['inc','صدور سند درآمد']],S.sub.fin,'sub')+page(S.sub.fin);
+function rep(){const a=agg(),t=S.sub.rep,D=(n,den,w,fm=F)=>den?fm(n/den):na(w);
+let h=tabs([['sum','خلاصه مالی دوره'],['ops','عملکرد عملیاتی'],['fin','شاخص‌های مالی و هزینه‌ای'],['stl','تسویه شرکا و پاداش دامپزشک']],t,'sub')+`<div class="tools"><button class="btn gh" style="grid-column:span 2" data-a="exp">${ic('down')} Export Excel</button></div>`;
+const pc=n=>F(n)+'٪',pl=n=>row('',F(n)).replace('<span></span>','');
+if(t=='sum')h+=`<div class="card"><b>فروش</b>${row('مجموع فروش ناخالص',F(a.gross))}${row('هزینه بارگیری',F(a.ld))}${row('هزینه حمل',F(a.fr))}${row('خالص فروش',F(a.netS),'pos')}</div>
+<div class="card"><b>هزینه‌های دوره</b>${a.ex.map(x=>row(x[0],F(x[1]))).join('')}${row('مجموع هزینه‌ها',F(a.texp),'warn')}</div>
+<div class="card"><b>سود و زیان</b>${row('سود/زیان قبل از کسورات',F(a.pl),a.pl<0?'neg':'pos')}</div><div class="note">دستمزد و سایر هزینه‌ها در این نمونه از اطلاعات نمایشی دوره آمده‌اند؛ منبع ثبت آن‌ها در مشخصات تعریف نشده است. این گزارش بر مبنای اطلاعات عملیاتی و تجاری است، نه جریان نقدی.</div>`;
+if(t=='ops')h+=`<div class="card">${row('تعداد جوجه‌ریزی',F(a.place))}${row('تلفات و ضایعات',F(a.loss))}${row('تعداد جوجه خالص',F(a.net))}${row('درصد تلفات',D(a.loss*100,a.place,'تعداد جوجه‌ریزی صفر است.',pc))}${row('درصد ماندگاری',D(a.net*100,a.place,'تعداد جوجه‌ریزی صفر است.',pc))}${row('مقدار کل خوراک',F(a.feed))}${row('خوراک به‌ازای هر جوجه خالص',D(a.feed,a.net,'تعداد جوجه خالص صفر است.'))}${row('مجموع گوشت فروخته‌شده',F(a.meat)+' کیلوگرم')}${row('میانگین وزن هر پرنده',D(a.meat,a.place,'تعداد جوجه‌ریزی صفر است.'))}${row('ضریب تبدیل غذایی (FCR)',a.fcr==null?na('مجموع گوشت فروخته‌شده صفر است.'):F(a.fcr),'warn')}</div><div class="note">خوراک خریداری‌شده و کارمزدی در FCR جمع می‌شوند؛ مواد اولیه مصرفی کارمزدی اضافه نمی‌شود.</div>`;
+if(t=='fin')h+=`<div class="card">${row('سود/زیان قبل از کسورات',F(a.pl),a.pl<0?'neg':'pos')}${row('نسبت سود به هزینه',D(a.pl,a.texp,'مجموع هزینه‌ها صفر است.'))}${row('هزینه هر جوجه خالص',D(a.texp,a.net,'تعداد جوجه خالص صفر است.'))}${row('هزینه هر کیلوگرم گوشت فروخته‌شده',a.cpk==null?na('مجموع گوشت فروخته‌شده صفر است.'):F(a.cpk))}${row('قیمت مرغ زنده',a.price==null?na('مجموع گوشت فروخته‌شده صفر است.'):F(a.price))}${row('درآمد خالص حاصل‌شده',a.price==null?na('مجموع گوشت فروخته‌شده صفر است.'):F(a.price*a.meat))}</div>`;
+if(t=='stl'){const sp=a.p.pt.reduce((x,y)=>x+y.pct,0);let sh=0;
+h+=a.p.pt.length?a.p.pt.map(({n,pct:q,basis,fs,fw})=>{const w=a.meat*q/100,s=a.price==null?null:w*a.price,c=a.cpk==null?null:w*a.cpk;sh+=s||0;return `<div class="card"><b>${n}</b>${row('درصد شراکت',pc(q))}${row('مبنای تسویه',BAS[basis]+(basis=='combo'?' (فروش '+F(fs)+'٪ / وزن '+F(fw)+'٪)':''))}${row('سهم وزنی',F(w)+' کیلوگرم')}${row('سهم فروش',s==null?na('مجموع گوشت فروخته‌شده صفر است.'):F(s))}${row('هزینه شراکت برای ما',c==null?na('مجموع گوشت فروخته‌شده صفر است.'):F(c))}</div>`}).join('')+`<div class="note">مجموع درصد شرکا ${pc(sp)} است${sp>100?' و از ۱۰۰٪ بیشتر است؛ باید اصلاح شود.':'؛ درصد باقی‌مانده خودکار تقسیم نمی‌شود.'}</div>`:'<div class="empty">برای این دوره شریکی ثبت نشده است.</div>';
+const f=a.fcr,th=f==null?null:f<1.6?'آستانه ۱٫۶۰':f>1.75?'آستانه ۱٫۷۵':'بزرگ‌ترین آستانه جدول PRD که از FCR بیشتر نباشد';
+h+=`<div class="card"><b>پاداش دامپزشک</b>${row('دامپزشکان ناظر دوره',(a.p.vets||[]).length?a.p.vets.join('، '):na('دامپزشکی برای دوره انتخاب نشده است.'))}${row('FCR محاسبه‌شده',f==null?na('مجموع گوشت فروخته‌شده صفر است.'):F(f))}${row('آستانه انتخابی',th||'—')}${row('پاداش هر جوجه خالص','<span class="na">جدول آستانه‌ها در PRD ثبت نشده است</span>')}${row('مبلغ کل پاداش','<span class="na">پس از ثبت جدول PRD محاسبه می‌شود</span>')}</div>
+<div class="card"><b>سود و زیان</b>${row('سود/زیان قبل از کسورات',F(a.pl),a.pl<0?'neg':'pos')}${row('مجموع سهم فروش شرکا',F(sh))}${row('سود/زیان نهایی پس از کسورات',na('مبلغ پاداش دامپزشک مشخص نیست.'))}</div>`}
+return h}
+const blank=()=>'<div class="blank"></div>';
+// ---------- forms ----------
+const opts=(l,v)=>{if(v&&!l.includes(v))l=[...l,v];return `<option value="" disabled ${v?'':'selected'}>انتخاب کنید</option>`+l.map(x=>`<option ${x==v?'selected':''}>${x}</option>`).join('')};
+const rsrc=k=>k=='retBuy'?['chick','drug','feed']:['sale'];
+function refOpts(k,v){const l=rsrc(k).flatMap(s=>recs(s).map(r=>({k:s,r}))).sort((a,b)=>b.r.id-a.r.id);return `<option value="" disabled ${v?'':'selected'}>انتخاب رکورد</option>`+l.map(x=>`<option value="${x.r.id}" ${x.r.id==v?'selected':''}>${toFa(x.r.date)} | ${K[x.k].t} | ${x.r.sup||x.r.cus} | ${F(x.r.qty)}</option>`).join('')}
+function fld([n,l,t,ph],r,k){let i;const v=n=='ptn'?r.pt:r[n];
+if(t=='n')i=`<input name="${n}" inputmode="decimal" autocomplete="off" placeholder="${ph||''}" value="${v?F(v):''}">`;
+else if(t=='a')i=`<textarea name="${n}" rows="2" placeholder="${ph||''}">${esc(v)}</textarea>`;
+else if(t=='c')i='<div class="calc" id="cost">—</div>';
+else if(t=='m')i=chips(n,Array.isArray(ph)?ph:byRole('دامپزشک'),v);
+else if(t=='cars')i=carsH(v);
+else if(t=='ptn')i=ptnH(v);
+else if(t=='r')i=`<select name="${n}">${refOpts(k,v)}</select>`;
+else if(t[0]=='s'){i=`<select name="${n}">${opts(srcOpts(t,ph,r),v)}</select>`+(t=='sk'?'<div class="hint" id="vh"></div>':n=='cfg'?'<div class="hint">مقادیر انتخاب‌شده برای این دوره ذخیره می‌شوند و تغییر بعدی تنظیمات، نتایج این دوره را تغییر نمی‌دهد.</div>':'')}
+else i=`<input name="${n}" autocomplete="off" placeholder="${ph||''}" value="${esc(t=='d'?toFa(v||''):v)}">`;
+return `<fieldset data-n="${n}"><legend>${l}</legend>${i}<small class="em"></small></fieldset>`}
+function formH(k,id){const r=id?{pdate:jal(new Date()),...find(id).r}:{date:jal(new Date()),pdate:jal(new Date()),pst:'فعال',roles:k=='ppl'&&S.b2.ppl!='all'?[S.b2.ppl]:[]},c=K[k];
+let h=`<form id="fm" class="card" data-k="${k}" data-id="${id}" onsubmit="return false"><div class="ft">${id?'ویرایش رکورد':'ثبت رکورد جدید'}: ${c.t}</div>`;
+for(const d of c.f){const pr=c.pair;if(pr&&d[0]==pr[1])continue;
+let z=pr&&d[0]==pr[0]?`<div class="two">${fld(d,r,k)}${fld(c.f.find(x=>x[0]==pr[1]),r,k)}</div>`:fld(d,r,k);if(d[4])z=`<div data-role="${d[4]}" hidden>${z}</div>`;h+=z;
+if(d[0]=='ref')h+='<div class="info" id="ri"></div>'}
+if(T[k])h+='<div class="info" id="lv"></div>';
+return h+`<div class="acts"><button type="button" class="btn pr" data-a="save">${id?'ذخیره تغییرات':'ثبت رکورد'}</button><button type="button" class="btn gh" data-a="cancel">انصراف</button></div></form>`}
+function collect(fm,k){const v={};for(const[n,,t]of K[k].f){if(t=='c')continue;
+if(t=='m'){v[n]=[...fm.querySelectorAll(`input[name="${n}"]:checked`)].map(e=>e.value);continue}
+if(t=='cars'){v.cars=[...fm.querySelectorAll('.car')].map(e=>({t:e.querySelector('[data-c=t]').value.trim(),p:e.querySelector('[data-c=p]').value.trim(),n:e.querySelector('[data-c=n]').value.trim()})).filter(c=>c.t||c.p);continue}
+if(t=='ptn'){v.ptn=[...fm.querySelectorAll('.pr')].filter(e=>e.querySelector('[data-p=on]').checked).map(e=>{const g=x=>e.querySelector('[data-p='+x+']').value;return{n:g('on'),pct:N(g('pct')),basis:g('basis'),fs:N(g('fs')),fw:N(g('fw'))}});continue}
+const e=fm.elements[n];if(!e)continue;v[n]=t=='n'?N(e.value):t=='r'?+e.value||0:e.value.trim()}return v}
+function rinfo(k,ref,self){const x=find(ref);if(!x)return null;const pv=recs(k).filter(r=>r.ref==ref&&r.id!=self),base=x.r.qty,prev=pv.reduce((a,r)=>a+r.qty,0),bb=x.r.bsk||0,bp=pv.reduce((a,r)=>a+(r.bsk||0),0);return{x,base,prev,ret:base-prev,bb,bp,br:bb-bp,ratio:bb>0?base/bb:0}}
+function chk(fm,fin){const k=fm.dataset.k,id=+fm.dataset.id,v=collect(fm,k),E={};
+if(fin)for(const[n,,t,,ro]of K[k].f){if(['c','a','ptn','cars'].includes(t)||O.has(n))continue;if(ro&&!(v.roles||[]).includes(ro))continue;if(t=='n'?!(v[n]>0):t=='m'?!(v[n]&&v[n].length):!v[n])E[n]=t=='n'?'یک مقدار معتبر و بزرگ‌تر از صفر وارد کنید.':'این فیلد الزامی است.'}
+if(k.startsWith('ret')&&v.ref){const i=rinfo(k,v.ref,id);if(i){if(v.qty>i.ret+1e-9)E.qty=`مقدار برگشتی از مقدار قابل برگشت (${F(i.ret)}) بیشتر است؛ ثبت مجاز نیست.`;if(k=='retSale'&&v.bsk>i.br+1e-9)E.bsk=`تعداد سبد برگشتی از تعداد قابل برگشت (${F(i.br)}) بیشتر است.`}}
+if(id&&['chick','drug','feed','sale'].includes(k)){const rs=recs(k=='sale'?'retSale':'retBuy').filter(r=>r.ref==id).reduce((a,r)=>a+r.qty,0);if(v.qty<rs)E.qty=`مقدار نمی‌تواند کمتر از مجموع برگشت‌های ثبت‌شده (${F(rs)}) باشد.`}
+if(k=='cyc'){const s=j2g(v.start),h=j2g(v.hv);if(v.start&&!s)E.start='تاریخ شمسی معتبر وارد کنید (مثال: ۱۴۰۵/۰۸/۱۹).';if(v.hv&&!h)E.hv='تاریخ شمسی معتبر وارد کنید.';else if(s&&h&&h<=s)E.hv='تاریخ برداشت باید بعد از تاریخ شروع باشد.';
+const pt=v.ptn||[],sm=pt.reduce((a,x)=>a+x.pct,0);let m='';if(pt.some(x=>!(x.pct>0)))m='درصد شراکت هر شریک انتخاب‌شده باید بیشتر از صفر باشد.';else if(sm>100+1e-9)m='مجموع درصد شراکت ('+F(sm)+'٪) نباید از ۱۰۰٪ بیشتر باشد.';if(m)E.ptn=m}
+fm.querySelectorAll('fieldset[data-n]').forEach(s=>{const m=E[s.dataset.n];s.classList.toggle('err',!!m);s.querySelector('.em').textContent=m||''});return E}
+function upd(fm,ev){const k=fm.dataset.k,id=+fm.dataset.id,nm=ev&&ev.target.name;
+if(k=='sale'&&nm=='cus'){fm.elements.dst.innerHTML=opts(dests(fm.elements.cus.value),'')}
+if(k=='retSale'&&(nm=='qty'||nm=='bsk')){const i=rinfo(k,+fm.elements.ref.value,id);if(i&&i.ratio){if(nm=='qty')fm.elements.bsk.value=F(+(N(fm.elements.qty.value)/i.ratio).toFixed(2));else fm.elements.qty.value=F(+(N(fm.elements.bsk.value)*i.ratio).toFixed(2))}}
+const v=collect(fm,k);
+if(T[k]){const t=T[k](v),c=cost(k,v);$('#lv').innerHTML=`<div><span>بهای کل</span><b>${F(t)}</b></div>`+(k=='raw'?'':`<div><span>${K[k].L}</span><b>${F(c)}</b></div>`);if($('#cost'))$('#cost').textContent=F(c)}
+if(fm.elements.veh){if(nm=='drv')fm.elements.veh.innerHTML=opts(cars(v.drv).map(carL),'');const cv=cars(v.drv).find(c=>carL(c)==fm.elements.veh.value);$('#vh').textContent=cv?cv.t+' | '+cv.p+(cv.n?' | '+cv.n:''):''}
+if(K[k].cf&&$('#cost'))$('#cost').textContent=K[k].cf(v);
+base_upd(fm,ev,k);
+if(k.startsWith('ret')){const i=rinfo(k,v.ref,id),b=$('#ri');if(!i)b.innerHTML='';else{const s=k=='retSale';b.innerHTML=`<div><span>${s?'مقدار فروش اولیه':'مقدار خرید اولیه'}</span><b>${F(i.base)}</b></div><div><span>مقدار برگشت قبلی</span><b>${F(i.prev)}</b></div><div><span>مقدار قابل برگشت</span><b class="pos">${F(i.ret)}</b></div>`+(s?`<div><span>تعداد سبد اولیه / قابل برگشت</span><b>${F(i.bb)} / ${F(i.br)}</b></div><div><span>میانگین وزن هر سبد</span><b>${i.ratio?F(i.ratio):'—'}</b></div>`+(i.ratio?'':'<div class="warn">محاسبه خودکار ممکن نیست؛ تعداد سبد فروش اولیه صفر یا نامشخص است.</div>'):'')}}
+chk(fm,false)}
+// ---------- modal ----------
+function detail(id){const x=find(id);if(!x)return'';const{k,r}=x,c=K[k],ret=k.startsWith('ret');
+let rows='';for(const[n,l,t]of c.f){if(t=='c'||n=='note')continue;if(n=='ref'){rows+=row(l,`<button class="lnk" data-a="det" data-id="${r.ref}">${refLbl(r)}</button>`);continue}
+rows+=row(l,t=='d'?toFa(r[n]):t=='n'?F(r[n]||0):esc(r[n]||'—'))}
+if(T[k])rows+=row('بهای کل',F(T[k](r)),'')+row(c.L,F(cost(k,r)),'pos');
+if(ret){const i=rinfo(k,r.ref,r.id);if(i)rows+=row('مقدار قابل برگشت پس از این رکورد',F(i.ret-r.qty))}
+const dep=['chick','drug','feed','sale'].includes(k)?recs(k=='sale'?'retSale':'retBuy').filter(z=>z.ref==id):[];
+if(dep.length)rows+=row('رکوردهای برگشت وابسته',dep.map(z=>`<button class="lnk" data-a="det" data-id="${z.id}">${toFa(z.date)}</button>`).join(' '));
+if(k=='exp'||k=='inc')rows+=row('منشأ','سند دستی');
+rows+=row('توضیحات تکمیلی',esc(r.note||'—'));
+return `<div class="mh"><button class="ib" data-a="edit" data-id="${id}">${ic('edit')} ویرایش</button><button class="ib dan" data-a="ask" data-id="${id}">${ic('trash')} حذف</button><span class="sp"></span>${S.modal.length>1?`<button class="ib" data-a="back">${ic('fwd')}</button>`:''}<button class="ib" data-a="close">${ic('x')}</button></div><h3>${c.t}</h3><div class="sub">${toFa(r.date)}</div>${rows}`}
+function ask(id){const x=find(id),n=['chick','drug','feed','sale'].includes(x.k)?recs(x.k=='sale'?'retSale':'retBuy').filter(z=>z.ref==id).length:0;
+return `<h3>حذف رکورد؟</h3><p style="margin:8px 0;color:var(--mu)">این رکورد از دوره و گزارش‌ها حذف می‌شود و قابل بازگشت نیست.${n?` ${F(n)} رکورد برگشت وابسته نیز حذف خواهد شد.`:''}</p><div class="acts" style="grid-template-columns:1fr 1fr"><button class="btn pr" style="background:var(--co);color:#3a0508" data-a="del" data-id="${id}">بله، حذف شود</button><button class="btn gh" data-a="back">انصراف</button></div>`}
+// ---------- shell ----------
+function render(top){const old=$('#fm'),keep=old&&S.form&&old.dataset.k==S.form.k&&+old.dataset.id==S.form.id?old:null;const m=$('main'),sc=m&&!top?m.scrollTop:0,p=cur(),s=S.sec,more=['trade','wh','prod','tre','fin'].includes(s);
+let body;if(S.ld)body='<div class="sk"></div>'.repeat(4);else body=`<h2 class="pt">${SECN[s]}</h2>`+(s=='home'?home():s=='trade'?trade():s=='fin'?fin():s=='rep'?rep():s=='base'?base():blank());
+const nv=(k,l,i)=>`<button data-a="nav" data-s="${k}" class="${s==k&&!S.more?'on':''}">${ic(i)}<span>${l}</span></button>`;
+const md=S.modal[S.modal.length-1];
+$('#app').innerHTML=`<header class="bar"><div class="brand"><i>${ic('chick')}</i>BroodBooks</div><select class="ps${isEnd(p)?' end':''}" data-a="ps">${P.map(q=>`<option value="${q.id}" ${q.id==p.id?'selected':''}>${q.name} · ${STN[q.st]}</option>`).join('')}</select></header><main>${body}</main>
+<nav class="nav">${nv('home','خانه','home')}${nv('base','پایه','db')}${nv('rep','گزارش‌ها','chart')}<button data-a="more">${ic('menu')}<span>بیشتر</span></button></nav>
+${S.more?`<div class="ov mo"><div class="mg">${[['trade','تبادلات تجاری','trade','sky'],['wh','تبادلات انبار','box','am'],['prod','تبادلات تولید','fac','vi'],['tre','تبادلات خزانه','wal','te'],['fin','تبادلات مالی','doc','co']].map(x=>`<button class="c-${x[3]}" data-a="nav" data-s="${x[0]}"><span class="ic">${ic(x[2])}</span>${x[1]}</button>`).join('')}</div></div>`:''}
+${md?`<div class="ov"><div class="md">${md.t=='ask'?ask2(md.id):md.t=='cfm'?cfm(md):detail2(md.id)}</div></div>`:''}`;
+$('main').scrollTop=sc;if(keep&&$('#fm'))$('#fm').replaceWith(keep);const fm=$('#fm');if(fm)upd(fm);
+document.querySelectorAll('.tw').forEach(w=>{const t=w.querySelector('.ti'),a=w.querySelector('.ar'),u=()=>{a.hidden=Math.abs(t.scrollLeft)+t.clientWidth>=t.scrollWidth-4};const on=t.querySelector('.on');if(on)t.scrollLeft+=on.getBoundingClientRect().left+on.offsetWidth/2-(t.getBoundingClientRect().left+t.clientWidth/2);t.onscroll=u;u()})}
+const load=()=>{S.ld=true;render(true);setTimeout(()=>{S.ld=false;render(true)},380)};
+function toast(m,e){const d=document.createElement('div');d.className='toast'+(e?' e':'');d.textContent=m;$('#app').append(d);setTimeout(()=>d.remove(),2200)}
+function goK(k){S.form=null;S.modal=[];if(K[k].g){S.sec='base';S.sub.base=BM[k];if(BM[k]!='ppl')S.b2[BM[k]]=k;else S.b2.ppl='all';return}if(k=='exp'||k=='inc'){S.sec='fin';S.sub.fin=k}else{S.sec='trade';if(BUY.includes(k)){S.sub.trade='buy';S.buy=k}else S.sub.trade=k}}
+document.addEventListener('click',e=>{
+if(e.target.classList.contains('ov')){S.modal=[];S.more=false;render();return}
+const el=e.target.closest('[data-a]');if(!el)return;const a=el.dataset.a,d=el.dataset;
+if(a=='ps')return;
+if(a=='nav'){S.sec=d.s;S.more=false;S.form=null;S.modal=[];S.banner=null;load()}
+else if(a=='more'){S.more=!S.more;render()}
+else if(a=='tab'){if(d.g=='buy')S.buy=d.v;else if(d.g=='b2')S.b2[S.sub.base]=d.v;else S.sub[S.sec]=d.v;S.form=null;S.banner=null;render(true)}
+else if(a=='sc'){const t=el.parentNode.querySelector('.ti');t.scrollBy({left:-170,behavior:'smooth'})}
+else if(a=='go'){S.sec='trade';goK(d.k);S.form={k:d.k,id:0};render(true)}
+else if(a=='newf'){S.form={k:d.k,id:0};render()}
+else if(a=='cancel'){S.form=null;render()}
+else if(a=='fo'){S.fo=!S.fo;render()}
+else if(a=='det'){S.modal.push({t:'det',id:+d.id});render()}
+else if(a=='close'){S.modal=[];render()}
+else if(a=='back'){S.modal.pop();render()}
+else if(a=='edit'){const k=find(+d.id).k;goK(k);S.form={k,id:+d.id};render(true)}
+else if(a=='ask'){S.modal.push({t:'ask',id:+d.id});render()}
+else if(a=='del'){const id=+d.id,x=find(id);DB[S.pid][x.k]=DB[S.pid][x.k].filter(r=>r.id!=id);for(const k of ['retBuy','retSale'])if(DB[S.pid][k])DB[S.pid][k]=DB[S.pid][k].filter(r=>r.ref!=id);S.modal=[];render();toast('رکورد حذف شد.')}
+else if(a=='save'){const fm=$('#fm'),k=fm.dataset.k,id=+fm.dataset.id,E=chk(fm,true);if(Object.keys(E).length){const f=fm.querySelector('fieldset.err');if(f)f.scrollIntoView({block:'center'});toast('لطفاً خطاهای فرم را برطرف کنید.',1);return}
+const v=collect(fm,k);if(k.startsWith('ret'))v.rk=find(v.ref).k;prep(k,v,id?find(id).r:null);const gp=K[k].g?0:S.pid,L=DB[gp][k]=DB[gp][k]||[];if(id)Object.assign(L.find(r=>r.id==id),v);else{const nid=uid++;L.push({id:nid,...v});if(k=='cyc')DB[nid]={}}S.form=null;render();toast(id?'رکورد ویرایش شد.':'رکورد ثبت شد.')}
+else if(a=='imp'){S.banner='خواندن فایل ممکن نیست: ورود Excel در این نمونه اولیه به سرویس متصل نیست.';render()}
+else if(a=='nb'){S.banner=null;render()}
+else if(a=='exp')toast('خروجی Excel در نمونه اولیه شبیه‌سازی شد.')
+else if(a=='delg'){const id=+d.id,x=find(id),L=DB[0][x.k];L.splice(L.findIndex(r=>r.id==id),1);if(x.k=='cyc'){delete DB[id];if(S.pid==id)S.pid=P[0].id}S.modal=[];render();toast('رکورد حذف شد.')}
+else if(a=='off'||a=='on'){find(+d.id).r.off=a=='off';S.modal=[];render();toast(a=='off'?'رکورد غیرفعال شد.':'رکورد فعال شد.')}
+else if(a=='cs'){S.modal.push({t:'cfm',id:+d.id,to:d.to});render()}
+else if(a=='cfmok'){const p=find(+d.id).r;p.st=d.to;if(d.to=='closed')p.snap1=jal(new Date());if(d.to=='settled')p.snap2=jal(new Date());S.modal=[];render();toast('وضعیت دوره تغییر کرد.')}
+else if(a=='addcar')$('#fm .cars').insertAdjacentHTML('beforeend',carRow({}));
+else if(a=='rmcar')el.closest('.car').remove()});
+document.addEventListener('change',e=>{if(e.target.matches('.ps')){S.pid=+e.target.value;S.form=null;S.modal=[];S.banner=null;load()}});
+['input','change'].forEach(t=>document.addEventListener(t,e=>{const fm=e.target.closest&&e.target.closest('#fm');if(fm)upd(fm,e)}));
+render();
+</script></body></html>
